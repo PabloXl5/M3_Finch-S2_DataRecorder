@@ -2357,8 +2357,14 @@ namespace Project_FinchControl
 
             for (int index = 0; index < numdberOfDataPoints; index++)
             {
-                temperatures[index] = finchRobot.getTemperature();
+                double fahrenheit;
+                double celsius = finchRobot.getTemperature();
+
+                fahrenheit = (celsius * 9) / 5 + 32;
+
+                temperatures[index] = fahrenheit;
                 Console.WriteLine($"\tReading {index + 1}: {temperatures[index].ToString("n2")}");
+
                 int waitInSeconds = (int)(dataPointFrequency * 1000);
                 finchRobot.wait(waitInSeconds);
             }
@@ -2376,6 +2382,19 @@ namespace Project_FinchControl
             return temperatures;
         }
 
+        //static double ConvertCelsiusToFahrenheit()
+        //{
+        //    double fahrenheit;
+
+        //    double celsius;
+
+        //    Console.WriteLine("Celsius: " + celsius);
+
+        //    fahrenheit = (celsius * 9) / 5 + 32;
+        //    Console.WriteLine("Fahrenheit: " + fahrenheit);
+
+        //    Console.ReadLine();
+        //}
 
         /// <summary>
         /// get the frequency of data points from the user 
@@ -2423,6 +2442,8 @@ namespace Project_FinchControl
 
             return numberOfDataPoints;
         }
+
+
         #endregion
 
         #region FINCH ROBOT MANAGEMENT
